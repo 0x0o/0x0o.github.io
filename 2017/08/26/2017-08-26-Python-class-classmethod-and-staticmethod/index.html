@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Python类的封装以及类方法静态方法对比API 的使用从心知的API Demo 中找到使用 requests 请求API的函数 1234567result &#x3D; requests.get(API, params&#x3D;&amp;#123;            &amp;#x27;key&amp;#x27;: KEY,            &amp;#x27;location&amp;#x27;: location,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python类的封装以及类方法静态方法对比">
+<meta property="og:url" content="https://0x0o.github.io/2017/08/26/2017-08-26-Python-class-classmethod-and-staticmethod/index.html">
+<meta property="og:site_name" content="0x0&#39;s Notes">
+<meta property="og:description" content="Python类的封装以及类方法静态方法对比API 的使用从心知的API Demo 中找到使用 requests 请求API的函数 1234567result &#x3D; requests.get(API, params&#x3D;&amp;#123;            &amp;#x27;key&amp;#x27;: KEY,            &amp;#x27;location&amp;#x27;: location,">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-08-26T07:00:33.000Z">
+<meta property="article:modified_time" content="2021-07-02T03:38:53.459Z">
+<meta property="article:author" content="0x0">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Python类的封装以及类方法静态方法对比</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2017/05/05/20170505-CocoaPods-bugs/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://0x0o.github.io/2017/08/26/2017-08-26-Python-class-classmethod-and-staticmethod/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://0x0o.github.io/2017/08/26/2017-08-26-Python-class-classmethod-and-staticmethod/&text=Python类的封装以及类方法静态方法对比"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://0x0o.github.io/2017/08/26/2017-08-26-Python-class-classmethod-and-staticmethod/&title=Python类的封装以及类方法静态方法对比"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://0x0o.github.io/2017/08/26/2017-08-26-Python-class-classmethod-and-staticmethod/&is_video=false&description=Python类的封装以及类方法静态方法对比"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python类的封装以及类方法静态方法对比&body=Check out this article: https://0x0o.github.io/2017/08/26/2017-08-26-Python-class-classmethod-and-staticmethod/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://0x0o.github.io/2017/08/26/2017-08-26-Python-class-classmethod-and-staticmethod/&title=Python类的封装以及类方法静态方法对比"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://0x0o.github.io/2017/08/26/2017-08-26-Python-class-classmethod-and-staticmethod/&title=Python类的封装以及类方法静态方法对比"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://0x0o.github.io/2017/08/26/2017-08-26-Python-class-classmethod-and-staticmethod/&title=Python类的封装以及类方法静态方法对比"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://0x0o.github.io/2017/08/26/2017-08-26-Python-class-classmethod-and-staticmethod/&title=Python类的封装以及类方法静态方法对比"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://0x0o.github.io/2017/08/26/2017-08-26-Python-class-classmethod-and-staticmethod/&name=Python类的封装以及类方法静态方法对比&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://0x0o.github.io/2017/08/26/2017-08-26-Python-class-classmethod-and-staticmethod/&t=Python类的封装以及类方法静态方法对比"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%B1%BB%E6%96%B9%E6%B3%95%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E5%AF%B9%E6%AF%94"><span class="toc-number">1.</span> <span class="toc-text">Python类的封装以及类方法静态方法对比</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#API-%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">1.1.</span> <span class="toc-text">API 的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E6%AF%94-classmethod-VS-staticmethod"><span class="toc-number">1.2.</span> <span class="toc-text">对比 @classmethod VS @staticmethod</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Module"><span class="toc-number">1.3.</span> <span class="toc-text">Module</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Python类的封装以及类方法静态方法对比
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">0x0</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-08-26T07:00:33.000Z" itemprop="datePublished">2017-08-26</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="Python类的封装以及类方法静态方法对比"><a href="#Python类的封装以及类方法静态方法对比" class="headerlink" title="Python类的封装以及类方法静态方法对比"></a>Python类的封装以及类方法静态方法对比</h1><h2 id="API-的使用"><a href="#API-的使用" class="headerlink" title="API 的使用"></a>API 的使用</h2><p>从心知的API Demo 中找到使用 requests 请求API的函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">result = requests.get(API, params=&#123;</span><br><span class="line">            <span class="string">&#x27;key&#x27;</span>: KEY,</span><br><span class="line">            <span class="string">&#x27;location&#x27;</span>: location,</span><br><span class="line">            <span class="string">&#x27;language&#x27;</span>: LANGUAGE,</span><br><span class="line">            <span class="string">&#x27;unit&#x27;</span>: UNIT</span><br><span class="line">        &#125;, timeout=<span class="number">7</span>)</span><br><span class="line">    <span class="keyword">return</span> result.json()</span><br></pre></td></tr></table></figure>
+
+<p>从回调函数中获得 json 数据，保存为字典</p>
+<h2 id="对比-classmethod-VS-staticmethod"><a href="#对比-classmethod-VS-staticmethod" class="headerlink" title="对比 @classmethod VS @staticmethod"></a>对比 @classmethod VS @staticmethod</h2><ol>
+<li>当一个函数逻辑上属于一个类又不依赖与类的属性的时候，可以使用 <code>@staticmethod</code>。</li>
+<li>使用 @staticmethod 可以避免每次使用的时都会创建一个对象的开销。</li>
+<li><code>@staticmethod</code> 可以使用类和类的实例调用。但是不依赖于类和类的实例的状态。</li>
+<li><code>classmethod</code> 是类对象与函数的结合。</li>
+<li>可以使用类和类的实例调用，但是都是将类作为隐含参数传递过去。</li>
+<li>使用类来调用 <code>classmethod</code> 可以避免将类实例化的开销。</li>
+</ol>
+<blockquote>
+<p>参考：**<a target="_blank" rel="noopener" href="http://www.wklken.me/posts/2013/12/22/difference-between-staticmethod-and-classmethod-in-python.html">PYTHON中STATICMETHOD和CLASSMETHOD的差异</a>**</p>
+</blockquote>
+<h2 id="Module"><a href="#Module" class="headerlink" title="Module"></a>Module</h2><p>单独创建一个py文件放置这个类，如果在其他地方需要用，直接拷过去就可以了。那么我创建utility文件夹存放这个py文件，通过 <code>from utility.const_value import *</code> 引入即可</p>
+<p>还可以创建一个 const_value.py 存放常量，例如 API key，LOCATION，API URL，UNIT等，这样就更加具有封装性</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%B1%BB%E6%96%B9%E6%B3%95%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E5%AF%B9%E6%AF%94"><span class="toc-number">1.</span> <span class="toc-text">Python类的封装以及类方法静态方法对比</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#API-%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">1.1.</span> <span class="toc-text">API 的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E6%AF%94-classmethod-VS-staticmethod"><span class="toc-number">1.2.</span> <span class="toc-text">对比 @classmethod VS @staticmethod</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Module"><span class="toc-number">1.3.</span> <span class="toc-text">Module</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://0x0o.github.io/2017/08/26/2017-08-26-Python-class-classmethod-and-staticmethod/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://0x0o.github.io/2017/08/26/2017-08-26-Python-class-classmethod-and-staticmethod/&text=Python类的封装以及类方法静态方法对比"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://0x0o.github.io/2017/08/26/2017-08-26-Python-class-classmethod-and-staticmethod/&title=Python类的封装以及类方法静态方法对比"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://0x0o.github.io/2017/08/26/2017-08-26-Python-class-classmethod-and-staticmethod/&is_video=false&description=Python类的封装以及类方法静态方法对比"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python类的封装以及类方法静态方法对比&body=Check out this article: https://0x0o.github.io/2017/08/26/2017-08-26-Python-class-classmethod-and-staticmethod/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://0x0o.github.io/2017/08/26/2017-08-26-Python-class-classmethod-and-staticmethod/&title=Python类的封装以及类方法静态方法对比"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://0x0o.github.io/2017/08/26/2017-08-26-Python-class-classmethod-and-staticmethod/&title=Python类的封装以及类方法静态方法对比"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://0x0o.github.io/2017/08/26/2017-08-26-Python-class-classmethod-and-staticmethod/&title=Python类的封装以及类方法静态方法对比"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://0x0o.github.io/2017/08/26/2017-08-26-Python-class-classmethod-and-staticmethod/&title=Python类的封装以及类方法静态方法对比"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://0x0o.github.io/2017/08/26/2017-08-26-Python-class-classmethod-and-staticmethod/&name=Python类的封装以及类方法静态方法对比&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://0x0o.github.io/2017/08/26/2017-08-26-Python-class-classmethod-and-staticmethod/&t=Python类的封装以及类方法静态方法对比"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2021
+    0x0
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
